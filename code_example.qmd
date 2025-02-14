@@ -20,7 +20,10 @@ need <- c("tidyverse","stargazer") # list packages needed
 have <- need %in% rownames(installed.packages()) # checks packages you have
 if(any(!have)) install.packages(need[!have]) # install missing packages
 invisible(lapply(need, library, character.only=T)) # load needed packages
- 
+
+library(tidyr)
+library(stargazer)
+
 # some more setup: setting up paths and folder structure if it does not yet exist
 table_dir <- "./output/tables/"
 figure_dir <- "./output/figures/"
@@ -37,6 +40,8 @@ dir.create("./data/processed") # for the processed data we might make later
 We can do this two different ways. The easiest way is to simply read the data directly from the web. This method, however, would leave you at the mercy of the website maintainer who could change the data or prevent access. For replicability, the best practice is to download the raw data and save it in a data folder, which can then be used later. Another option is to read the data from the web, but save it to a local file.
 
 ```{r}
+
+library(tidyr)
 # read in the data from the web
 #df <- read.csv('https://data.london.gov.uk/download/mps-stop-and-search-public-dashboard-data/25f8428d-924d-472f-96b4-b91a8a5c9fa3/Stops_LDS_Extract_24Months.csv')
 
@@ -53,9 +58,9 @@ We can do this two different ways. The easiest way is to simply read the data di
 
 ```{r}
 df <- read.csv('data/stop_search.csv')
-# let's get the distribution of crimes using the  `Reason.for.Stop` column 
-colnames(df)
+print(colnames(df))
 ```
+
 
 # Let's get the distribution of crimes using the  `Reason.for.Stop` column
 
